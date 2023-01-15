@@ -76,6 +76,26 @@ export default function Body() {
     step++;
   };
 
+  const animateBubble = () => {
+    if (step <= animationArr.length - 1) {
+      const action = animationArr[step];
+      setCurrentAction({
+        ...currentAction,
+        i: action[1],
+        j: action[2],
+        action: action[0],
+      });
+      if (action[0] === "swap") {
+        dispatch(handleSwap({ i: action[1], j: action[2] }));
+      }
+    } else {
+      step = 0;
+      clearInterval(intv);
+      dispatch(resetAnimation());
+    }
+    step++;
+  };
+
   useEffect(() => {
     if (intv) {
       clearInterval(intv);
@@ -83,7 +103,11 @@ export default function Body() {
 
     if (isStarted) {
       intv = setInterval(() => {
-        currentAlgo === 0 ? animateQuick() : animateMerge();
+        currentAlgo === 0
+          ? animateQuick()
+          : currentAlgo === 1
+          ? animateMerge()
+          : animateBubble();
       }, 80);
       dispatch(setAnimationIntv(intv));
     } else {
@@ -108,7 +132,8 @@ export default function Body() {
               idx === currentAction?.pivot && "bg-yellow-400"
             } 
             ${
-              currentAction.action === "compare_true" &&
+              (currentAction.action === "compare_true" ||
+                currentAction.action === "swap") &&
               (idx === currentAction?.i || idx === currentAction?.j) &&
               "bg-green-500"
             }
