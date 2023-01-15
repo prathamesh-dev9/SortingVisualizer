@@ -23,25 +23,15 @@ export default function Body() {
   const animateQuick = () => {
     if (step <= animationArr.length - 1) {
       const action = animationArr[step];
-      setCurrentAction(action);
+      setCurrentAction({
+        action: action[0],
+        i: action[1],
+        j: action[2],
+        pivot: action[3],
+      });
       switch (action[0]) {
         case "compare_true": {
           dispatch(handleSwap({ i: action[1], j: action[2] }));
-          setCurrentAction({
-            action: action[0],
-            i: action[1],
-            j: action[2],
-            pivot: action[3],
-          });
-          break;
-        }
-        case "compare_false": {
-          setCurrentAction({
-            action: action[0],
-            i: action[1],
-            j: action[2],
-            pivot: action[3],
-          });
           break;
         }
         case "fixed": {
@@ -69,39 +59,14 @@ export default function Body() {
   const animateMerge = () => {
     if (step <= animationArr.length - 1) {
       const action = animationArr[step];
-      setCurrentAction(action);
-      switch (action[0]) {
-        case "compare_true": {
-          setCurrentAction({
-            ...currentAction,
-            i: action[1],
-            j: action[2],
-            action: action[0],
-          });
-          break;
-        }
-        case "compare_false": {
-          setCurrentAction({
-            ...currentAction,
-            i: action[1],
-            j: action[2],
-            action: action[0],
-          });
-          break;
-        }
-        case "shift_replace": {
-          dispatch(handleShiftReplace({ start: action[1], index: action[2] }));
-          setCurrentAction({
-            ...currentAction,
-            i: action[1],
-            j: action[2],
-            action: action[0],
-          });
-          break;
-        }
-        default: {
-          break;
-        }
+      setCurrentAction({
+        ...currentAction,
+        i: action[1],
+        j: action[2],
+        action: action[0],
+      });
+      if (action[0] === "shift_replace") {
+        dispatch(handleShiftReplace({ start: action[1], index: action[2] }));
       }
     } else {
       step = 0;
