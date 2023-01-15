@@ -17,7 +17,7 @@ const initialState = {
     },
     {
       id: "3",
-      name: "Insertion Sort",
+      name: "Selection Sort",
     },
   ],
 };

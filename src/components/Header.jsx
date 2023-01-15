@@ -12,6 +12,7 @@ import { generateArray } from "../reducers/array";
 import QuickSort from "../algorithms/QuickSort";
 import MergeSort from "../algorithms/MergeSort";
 import BubbleSort from "../algorithms/BubbleSort";
+import SelectionSort from "../algorithms/SelectionSort";
 
 export default function Header() {
   const { currentAlgo, algorithms } = useSelector((state) => state.algorithm);
@@ -36,7 +37,9 @@ export default function Header() {
         ? QuickSort
         : currentAlgo === 1
         ? MergeSort
-        : BubbleSort;
+        : currentAlgo === 2
+        ? BubbleSort
+        : SelectionSort;
     doSort(array, 0, array.length - 1, animationArr);
     dispatch(insertAnimationSteps(animationArr));
     dispatch(startAnimation(true));

@@ -76,7 +76,7 @@ export default function Body() {
     step++;
   };
 
-  const animateBubble = () => {
+  const animateBubbleOrSelection = () => {
     if (step <= animationArr.length - 1) {
       const action = animationArr[step];
       setCurrentAction({
@@ -107,7 +107,7 @@ export default function Body() {
           ? animateQuick()
           : currentAlgo === 1
           ? animateMerge()
-          : animateBubble();
+          : animateBubbleOrSelection();
       }, 80);
       dispatch(setAnimationIntv(intv));
     } else {
