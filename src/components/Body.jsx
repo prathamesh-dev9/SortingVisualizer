@@ -123,12 +123,12 @@ export default function Body() {
   }, [isStarted]);
 
   return (
-    <div className="bg-[#3c3c3c] mt-8 py-4 px-20 w-full text-white rounded-xl flex justify-center h-4/5">
+    <div className="bg-[#3c3c3c] mt-8 py-4 px-20 w-full text-white rounded-xl flex justify-center h-4/5 max-md:p-4">
       {(array || []).map((item, idx) => {
         return (
           <div
             key={idx}
-            className={`w-4 text-[8px] text-center text-zinc-300 bg-teal-600 m-1 ${
+            className={`w-4 m-1 text-[8px] max-md:w-2  max-md:text-[4px] max-md:m-[2px] text-center text-zinc-300 bg-teal-600 ${
               idx === currentAction?.pivot && "bg-yellow-400"
             } 
             ${
