@@ -142,7 +142,7 @@ export default function Body() {
               (idx === currentAction?.i || idx === currentAction?.j) &&
               "bg-red-500"
             }`}
-            style={{ height: `${(item * 100) / 18}px` }}
+            style={{ height: `${(item * 100) / 20}px` }}
           >
             {item}
           </div>
